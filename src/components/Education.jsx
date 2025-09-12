@@ -43,9 +43,9 @@ export default function Education() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: i * 0.2 }}
-              className={`relative flex items-center w-full ${
-                i % 2 === 0 ? "justify-start pr-8" : "justify-end pl-8"
-              }`}
+              className={`relative flex w-full items-center 
+                ${i % 2 === 0 ? "md:justify-start md:pr-8" : "md:justify-end md:pl-8"} 
+                justify-center text-center md:text-left`}
             >
               {/* Dot */}
               <div className="absolute left-1/2 top-6 w-6 h-6 rounded-full bg-cyan-400 shadow-[0_0_20px_#22d3ee] animate-pulse -translate-x-1/2"></div>
