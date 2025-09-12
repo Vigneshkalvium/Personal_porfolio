@@ -21,8 +21,9 @@ export default function Navbar() {
 
   const navItems = [
     { label: "Home", href: "#home" },
-    { label: "Skills", href: "#skills" },
     { label: "About", href: "#about" },
+    { label: "Skills", href: "#skills" },
+    {label: "Projects", href: "#projects"},
     { label: "Connect", href: "#connect" },
   ];
 

@@ -5,6 +5,8 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import Skills from "./components/Skills";
 import Education from "./components/Education";
 import About from "./components/About";
+import projectData from "./data/ProjectData";
+import Projects from "./components/Projects";
 
 // Expose THREE globally for Vanta
 window.THREE = THREE;
@@ -159,6 +161,7 @@ export default function App() {
         <About />
         <Skills />
         <Education />
+        <Projects projects={projectData} />
       </main>
     </div>
   );
