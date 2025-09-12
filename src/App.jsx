@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import * as THREE from "three";
 import Navbar from "./components/Navbar";
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import Skills from "./components/Skills";
 
 // Expose THREE globally for Vanta
 window.THREE = THREE;
@@ -136,7 +137,7 @@ export default function App() {
 
       {/* Extra content for scrolling */}
       <div className="h-[200vh] flex items-center justify-center">
-        <h1 className="text-3xl">Hello World 👋</h1>
+        <Skills/>
       </div>
     </div>
   );
