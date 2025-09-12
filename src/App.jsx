@@ -3,6 +3,7 @@ import * as THREE from "three";
 import Navbar from "./components/Navbar";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Skills from "./components/Skills";
+import Education from "./components/Education";
 
 // Expose THREE globally for Vanta
 window.THREE = THREE;
@@ -87,10 +88,10 @@ export default function App() {
   }, []);
 
   return (
-    <div className="bg-slate-950 text-white min-h-screen relative">
+    <div className="bg-slate-950 text-white min-h-screen relative pb-10">
       <Navbar scrolled={scrolled} />
 
-      <div ref={vantaRef} className="w-screen h-screen relative inset-0">
+      <div ref={vantaRef} className="w-screen h-screen mb-10">
         <div className="absolute inset-0 flex flex-col items-start justify-center 
                         px-6 sm:px-12 md:px-24 lg:px-30    xl:px-34 text-left bg-transparent z-10">
           {/* Name */}
@@ -136,8 +137,12 @@ export default function App() {
       </div>
 
       {/* Extra content for scrolling */}
-      <div className="h-[200vh] flex items-center justify-center">
+      <div className=" items-center justify-center gap-6">
         <Skills/>
+      </div>
+
+      <div className="mt-20 ">
+        <Education/>
       </div>
     </div>
   );
