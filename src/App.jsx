@@ -97,7 +97,7 @@ export default function App() {
     <div className="bg-slate-950 text-white min-h-screen relative  flex flex-col">
       <Navbar scrolled={scrolled} />
 
-      <div ref={vantaRef} className="relative w-screen h-screen mb-10 overflow-hidden">
+      <div ref={vantaRef} className="relative w-screen h-screen mb-10 overflow-hidden" id="home">
         <div
           className="absolute inset-0 flex flex-col items-start justify-center 
                      px-6 sm:px-12 md:px-24 lg:px-28 xl:px-32 text-left bg-transparent z-10"
