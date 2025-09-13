@@ -7,6 +7,9 @@ import Education from "./components/Education";
 import About from "./components/About";
 import projectData from "./data/ProjectData";
 import Projects from "./components/Projects";
+import Reviews from "./components/Reviews";
+import Contact from "./components/contact";
+import Footer from "./components/footer";
 
 // Expose THREE globally for Vanta
 window.THREE = THREE;
@@ -91,7 +94,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="bg-slate-950 text-white min-h-screen relative pb-16 flex flex-col">
+    <div className="bg-slate-950 text-white min-h-screen relative  flex flex-col">
       <Navbar scrolled={scrolled} />
 
       <div ref={vantaRef} className="relative w-screen h-screen mb-10 overflow-hidden">
@@ -162,7 +165,10 @@ export default function App() {
         <Skills />
         <Education />
         <Projects projects={projectData} />
+        <Reviews/>
+        <Contact/>
       </main>
+      <Footer/>
     </div>
   );
 }

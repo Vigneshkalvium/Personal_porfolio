@@ -1,1 +1,6 @@
 @import "tailwindcss";
+.swiper-pagination {
+  position: relative !important;
+  margin-top: 1rem;
+  text-align: center;
+}
