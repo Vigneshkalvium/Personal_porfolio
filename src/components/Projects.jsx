@@ -31,10 +31,12 @@ export default function Projects({ projects }) {
           >
             {/* Project Image */}
             <div className="h-52 sm:h-56 md:h-60 w-full overflow-hidden rounded-t-3xl">
+              {/* {console.log(project.image)} */}
               <img
+              
                 src={project.image}
                 alt={project.title}
-                className="w-full h-full object-cover transition-transform duration-700 ease-in-out hover:scale-110"
+                className="w-full h-full object-fit transition-transform duration-700 ease-in-out hover:scale-110"
                 loading="lazy"
               />
             </div>

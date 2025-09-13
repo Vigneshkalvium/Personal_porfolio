@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import  me  from "../images/me.jpg"; // Make sure this path is correct
+import resume from "../images/resume.pdf"
 
 const tags = ["Web Developer", "Blockchain Enthusiast", "UI/UX Explorer"];
 
@@ -7,22 +9,32 @@ export default function About() {
     <section
       id="about"
       className="w-full min-h-screen flex flex-col md:flex-row items-center justify-center 
-                  px-6 sm:px-10 md:px-16 lg:px-24 text-white relative z-10"
+                 px-6 sm:px-10 md:px-16 lg:px-24 text-white relative z-10"
       aria-label="About me section"
     >
-      {/* Left side: Avatar/Image with floating animation */}
+      {/* Left side: Avatar/Image with rotating and breathing animation */}
       <motion.div
-        initial={{ opacity: 0, x: -80, y: 0 }}
-        animate={{ opacity: 1, x: 0, y: [0, -10, 0] }}
-        transition={{ duration: 1.8, ease: "easeInOut", repeat: Infinity, repeatType: "loop" }}
+        initial={{ opacity: 0, rotateY: 0, scale: 1 }}
+        animate={{
+          opacity: 1,
+          rotateY: [0, 15, -15, 0], // 3D rocking rotation
+          scale: [1, 1.05, 1, 1.05], // breathing pulsation
+        }}
+        transition={{
+          duration: 6,
+          ease: "easeInOut",
+          repeat: Infinity,
+          repeatType: "loop",
+        }}
         className="w-32 h-32 sm:w-40 sm:h-40 md:w-56 md:h-56 lg:w-64 lg:h-64 mb-8 md:mb-0 
                    md:mr-12 rounded-full overflow-hidden border-4 border-cyan-400 
                    shadow-[0_0_25px_#22d3ee] flex-shrink-0"
+        style={{ perspective: 800 }}
       >
         <img
-          src="/profile.jpg" // replace with your image
+          src={me} // replace with your image import
           alt="Vignesh"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover rounded-full"
           loading="lazy"
           decoding="async"
         />
@@ -36,9 +48,10 @@ export default function About() {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="max-w-2xl text-center md:text-left"
       >
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 
-                       bg-gradient-to-r from-cyan-400 via-teal-400 to-blue-500 bg-clip-text text-transparent
-                       drop-shadow-[0_0_20px_rgba(34,211,238,0.8)] select-none"
+        <h2
+          className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 
+                     bg-gradient-to-r from-cyan-400 via-teal-400 to-blue-500 bg-clip-text text-transparent
+                     drop-shadow-[0_0_20px_rgba(34,211,238,0.8)] select-none"
         >
           👋 About Me
         </h2>
@@ -47,10 +60,12 @@ export default function About() {
           Hi, I’m{" "}
           <span className="text-cyan-400 font-semibold">Vignesh Angamuthu</span>, a passionate{" "}
           <span className="text-cyan-300 font-medium">Software Engineer</span> and{" "}
-          <span className="text-cyan-300 font-medium">Web3 enthusiast</span>. <br />
-          I love crafting <span className="text-cyan-300 font-medium">3D animated experiences</span>,{" "}
-          building <span className="text-cyan-300 font-medium">responsive websites</span>, and exploring the future of{" "}
-          <span className="text-cyan-300 font-medium">Blockchain</span>.
+          <span className="text-cyan-300 font-medium">MERN Stack Developer</span>. <br />
+          I enjoy solving challenging problems with{" "}
+          <span className="text-cyan-300 font-medium">Java, C++, and Python</span>, 
+          building <span className="text-cyan-300 font-medium">responsive web applications</span>, 
+          and constantly improving my{" "}
+          <span className="text-cyan-300 font-medium">Data Structures & Algorithms</span> skills.
         </p>
 
         {/* Animated tags with stagger */}
@@ -82,7 +97,7 @@ export default function About() {
 
         {/* Download CV button with glow animation */}
         <motion.a
-          href="/resume.pdf" // replace with your resume path
+          href={resume} // replace with your resume path
           download
           whileHover={{ scale: 1.1, boxShadow: "0 0 20px #22d3ee, 0 0 30px #22d3ee" }}
           whileTap={{ scale: 0.95 }}
