@@ -4,3 +4,11 @@
   margin-top: 1rem;
   text-align: center;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  scroll-margin-top: 56px; /* example navbar height */
+}

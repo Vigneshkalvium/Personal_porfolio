@@ -63,7 +63,8 @@ export default function Skills() {
   return (
     <section
       className="w-full min-h-screen flex flex-col items-center justify-center px-4 sm:px-8 md:px-16 text-white relative z-10 mb-15"
-      aria-label="Skills section"
+      aria-label="skills"
+      id="skills"
     >
       <motion.h2
         initial={{ opacity: 0, y: -40, scale: 0.95 }}

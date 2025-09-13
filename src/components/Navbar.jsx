@@ -1,154 +1,84 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { FaBars, FaTimes } from "react-icons/fa";
 
-const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+export default function Navbar({ scrolled }) {
+  const [isOpen, setIsOpen] = useState(false);
 
-function randomizeText(text) {
-  return text
-    .split("")
-    .map((char) => {
-      if (char.match(/[a-zA-Z0-9]/)) {
-        return letters[Math.floor(Math.random() * letters.length)];
-      }
-      return char;
-    })
-    .join("");
-}
-
-export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [hoverTexts, setHoverTexts] = useState({});
-
-  const navItems = [
-    { label: "Home", href: "#home" },
-    { label: "About", href: "#about" },
-    { label: "Skills", href: "#Skills section" },
-    {label: "Projects", href: "#projects"},
-    { label: "Connect", href: "#contact" },
+  const navLinks = [
+    { id: "home", label: "Home" },
+    { id: "about", label: "About" },
+    { id: "projects", label: "Projects" },
+    { id: "reviews", label: "Reviews" },
+    { id: "contact", label: "Contact" },
   ];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Flicker effect: quickly randomize text at about 40ms intervals for 0.5s then reset
-  const handleMouseEnter = (index) => {
-    const originalText = navItems[index].label;
-    let flickerCount = 0;
-    const intervalDuration = 40;
-    const flickerMaxCount = 8; // 12 * 40ms = 480ms flicker duration
-
-    const flickerInterval = setInterval(() => {
-      setHoverTexts((prev) => ({
-        ...prev,
-        [index]: randomizeText(originalText),
-      }));
-      flickerCount++;
-
-      if (flickerCount >= flickerMaxCount) {
-        clearInterval(flickerInterval);
-        setHoverTexts((prev) => ({
-          ...prev,
-          [index]: originalText,
-        }));
-      }
-    }, intervalDuration);
+  const handleScroll = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+    setIsOpen(false);
   };
-
-  const handleMouseLeave = (index) => {
-    const originalText = navItems[index].label;
-    setHoverTexts((prev) => ({
-      ...prev,
-      [index]: originalText,
-    }));
-  };
-
-  const handleLinkClick = () => setMenuOpen(false);
 
   return (
-    <nav
-      className={`fixed top-0 w-full h-14 flex items-center justify-between px-4 md:px-8 z-50 transition-all duration-300
-        ${scrolled ? "bg-slate-900/60 backdrop-blur-sm shadow-lg" : "bg-black"}`}
+    <motion.nav
+      initial={{ y: -80, opacity: 0 }}
+      animate={scrolled ? { y: 0, opacity: 1 } : { y: -80, opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="fixed top-0 left-0 w-full bg-slate-900/80 backdrop-blur-md border-b border-cyan-400/30 z-50"
     >
-      {/* Brand/Name with glowing pulse */}
-      <div className="text-cyan-400 font-bold text-lg tracking-wide drop-shadow-[0_0_10px_rgba(34,211,238,0.7)] animate-pulse select-none">
-        Vignesh Angamuthu
-      </div>
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        {/* Logo */}
+        <motion.h1
+          className="text-2xl font-bold text-cyan-400 cursor-pointer"
+          whileHover={{ scale: 1.1 }}
+          onClick={() => handleScroll("home")}
+        >
+          Vignesh Developer
+        </motion.h1>
 
-      {/* Desktop Menu */}
-      <ul className="hidden md:flex gap-12 font-mono text-white select-none">
-        {navItems.map((item, i) => (
-          <li key={i} className="relative">
-            <a
-              href={item.href}
-              className="relative transition-all duration-300 hover:text-cyan-400 hover:scale-110"
-              onMouseEnter={() => handleMouseEnter(i)}
-              onMouseLeave={() => handleMouseLeave(i)}
+        {/* Desktop Links */}
+        <ul className="hidden md:flex gap-8 text-white font-semibold">
+          {navLinks.map((link) => (
+            <li
+              key={link.id}
+              className="cursor-pointer hover:text-cyan-400 transition-colors"
+              onClick={() => handleScroll(link.id)}
             >
-              <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-cyan-400 transition-all duration-300 hover:w-full"></span>
-
-              <span
-                key={hoverTexts[i] ?? item.label}
-                className="relative drop-shadow-[0_0_8px_rgba(34,211,238,0.7)]"
-              >
-                {hoverTexts[i] ?? item.label}
-              </span>
-            </a>
-          </li>
-        ))}
-      </ul>
-
-      {/* Mobile Hamburger */}
-      <div className="md:hidden relative z-50">
-        <button
-          aria-label="Toggle menu"
-          onClick={() => setMenuOpen((prev) => !prev)}
-          className="flex flex-col justify-center items-center w-4 h-4 rounded group focus:outline-none"
-        >
-          <span
-            className={`block bg-cyan-400 h-1 w-7 rounded-md transition-transform duration-300 origin-left ${
-              menuOpen ? "rotate-45 translate-y-2.5" : ""
-            }`}
-          />
-          <span
-            className={`block bg-cyan-400 h-1 w-7 rounded-md my-1 transition-opacity duration-300 ${
-              menuOpen ? "opacity-0" : "opacity-100"
-            }`}
-          />
-          <span
-            className={`block bg-cyan-400 h-1 w-7 rounded-md transition-transform duration-300 origin-left ${
-              menuOpen ? "-rotate-45 -translate-y-2.5" : ""
-            }`}
-          />
-        </button>
-
-        {/* Mobile menu dropdown */}
-        <ul
-          className={`absolute right-0 top-14 bg-slate-900/90 backdrop-blur-md rounded-md py-4 w-36 flex flex-col gap-4 shadow-lg transition-transform origin-top-right
-            ${
-              menuOpen
-                ? "scale-100 opacity-100"
-                : "scale-95 opacity-0 pointer-events-none"
-            }`}
-        >
-          {navItems.map((item, i) => (
-            <li key={i} className="text-center text-white font-mono">
-              <a
-                href={item.href}
-                onClick={handleLinkClick}
-                className="block w-full px-4 py-2 hover:bg-cyan-400 hover:text-black rounded transition-colors duration-300"
-              >
-                {item.label}
-              </a>
+              {link.label}
             </li>
           ))}
         </ul>
+
+        {/* Mobile Menu Toggle */}
+        <div
+          className="md:hidden text-white text-2xl cursor-pointer"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {isOpen ? <FaTimes /> : <FaBars />}
+        </div>
       </div>
-    </nav>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <motion.ul
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="md:hidden flex flex-col items-center gap-6 bg-slate-900 py-6 border-t border-cyan-400/30 text-white font-semibold"
+        >
+          {navLinks.map((link) => (
+            <li
+              key={link.id}
+              className="cursor-pointer hover:text-cyan-400 transition-colors"
+              onClick={() => handleScroll(link.id)}
+            >
+              {link.label}
+            </li>
+          ))}
+        </motion.ul>
+      )}
+    </motion.nav>
   );
 }
