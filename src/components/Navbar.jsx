@@ -9,7 +9,7 @@ export default function Navbar({ scrolled }) {
     { id: "home", label: "Home" },
     { id: "about", label: "About" },
     { id: "projects", label: "Projects" },
-    { id: "reviews", label: "Reviews" },
+    { id: "skills", label: "Skills" },
     { id: "contact", label: "Contact" },
   ];
 
