@@ -22,9 +22,9 @@ export default function Navbar() {
   const navItems = [
     { label: "Home", href: "#home" },
     { label: "About", href: "#about" },
-    { label: "Skills", href: "#skills" },
+    { label: "Skills", href: "#Skills section" },
     {label: "Projects", href: "#projects"},
-    { label: "Connect", href: "#connect" },
+    { label: "Connect", href: "#contact" },
   ];
 
   useEffect(() => {
